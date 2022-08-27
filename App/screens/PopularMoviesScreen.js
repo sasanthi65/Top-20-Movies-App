@@ -1,12 +1,11 @@
 import React,{Component} from "react";
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView,} from "react-native";
-
+import { StyleSheet, View, Text, TouchableOpacity,FlatList, SafeAreaView} from "react-native";
 export default class PopularMoviesScreen extends Component{
   constructor(){
     super();
     this.state= {
-      isFetching:true,
-      movieList:null,
+      isFetching:false,
+      movieList:[],
     }
   };
   componentDidMount(){
@@ -17,15 +16,60 @@ export default class PopularMoviesScreen extends Component{
         Accept : 'application/json',
       }
     }).then(res => res.json())
-    .then(res => console.log(res.results))
+    .then(res => this.setState({isFetching:false, movieList:res.results}))
     })
   }
 
+  moreDetails=()=>{
+    this.props.navigation.navigate('Details')
+    };
+
   render(){
+    // movie items are loaded with title, overview and poster
+    const Item = ({ title , overview }) => (
+        <TouchableOpacity onPress={this.moreDetails} style={styles.item}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{overview}</Text>
+        </TouchableOpacity>
+      );
+      // render each movie item
+    const renderItem = ({ item}) => (
+        <Item title={item.title} 
+        overview={item.overview}/>
+        
+      );
+    
+    const {movieList, isFetching}= this.state;
+    // const message = isFetching? 'Connecting': movieList.title;
     return(
-        <View>
-            <Text></Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <FlatList
+                data={movieList}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}/>
+        </SafeAreaView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+    container:{
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center'
+    },
+    item: {
+        flex:1,
+        alignSelf:'stretch',
+        margin:10,
+        alignItems:'center',
+        justifyContent:'center',
+        borderBottomWidth:2,
+        // borderBottomColor:'#eee',
+        // borderRadius:4
+    },
+    title: {
+        fontSize: 28,
+        color:'black'
+      },
+  })
