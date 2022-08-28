@@ -22,14 +22,11 @@ export default class PopularMoviesScreen extends Component{
     });
   }
 
-  moreDetails=()=>{
-    this.props.navigation.navigate('Details')
-    };
-
   render(){
     // movie items are loaded with title, overview and poster
-    const Item = ({ title , overview , poster_path}) => (
-        <TouchableOpacity onPress={this.moreDetails} style={styles.item}>
+    const Item = ({ list, title , overview , poster_path}) => (
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Details',list)}
+            style={styles.item}>
           <Text style={styles.title}>{title}</Text>
           <Image style={styles.image} source={{uri:"https://image.tmdb.org/t/p/w500/"+poster_path}}/>
           <Text style={styles.textStyle}>{overview}</Text>
@@ -37,8 +34,9 @@ export default class PopularMoviesScreen extends Component{
       );
 
       // render each movie item
-    const renderItem = ({ item}) => (
-        <Item title={item.title}
+    const renderItem = ({item}) => (
+        <Item list={item} 
+        title={item.title}
         poster_path={item.poster_path}
         overview={item.overview}/> 
       );
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:"#fff",
         padding: 20,
-        margin:20,
+        margin:10,
         borderRadius:20,
         alignSelf:'stretch',
         alignItems:'center',
@@ -86,7 +84,8 @@ const styles = StyleSheet.create({
     },
     textStyle:{
         fontSize:15,
-        color:'black'
+        color:'black',
+        alignContent:'space-between'
     },
     image:{
         width:300,
