@@ -5,10 +5,13 @@ import { StyleSheet, View, Text } from "react-native";
 export default class DetailedScreen extends Component{
     render(){
         const name = this.props.route.params.title;
-        // const {route} = this.props.route;
+        const overview = this.props.route.params.overview;
         return(
-            // <Text> {this.props.navigation.getParam('title')}</Text>
-            <Text> {name}</Text>
+            <View style={styles.container}>
+                <Text style={styles.title}> {name}</Text>
+                <Text style={styles.textStyle}>{overview}</Text>
+            </View>
+            
         );
     }
     
@@ -21,7 +24,10 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
     },
+    title:{
+        fontSize:28
+    },
     textStyle:{
-        fontSize:28,
+        fontSize:14,
     }
 })
