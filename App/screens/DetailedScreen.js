@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     topic:{
         fontSize:20,
-        color:'black',
+        color:'#db1358',
         paddingRight:270,
         marginTop:10,
 
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
         fontSize:17,
         marginLeft:20,
         marginRight:20,
-        textAlign:'justify'
+        textAlign:'justify',
+        color:'black'
     },
     image:{
         width:300,

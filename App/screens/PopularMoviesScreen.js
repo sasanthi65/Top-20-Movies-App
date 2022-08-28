@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
     textStyle:{
         fontSize:15,
         color:'black',
-        alignContent:'space-between'
+        alignContent:'space-between',
+        textAlign:'justify'
     },
     image:{
         width:300,
