@@ -4,8 +4,6 @@ import { StyleSheet, View, Text, Image} from "react-native";
  
 export default class DetailedScreen extends Component{
     render(){
-        const backdrop_path = this.props.route.params.backdrop_path;
-        const image = { uri: "https://image.tmdb.org/t/p/w500/"+backdrop_path};
         const name = this.props.route.params.title;
         const overview = this.props.route.params.overview;
         const poster_path = this.props.route.params.poster_path;
