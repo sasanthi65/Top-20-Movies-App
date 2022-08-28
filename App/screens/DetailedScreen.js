@@ -1,9 +1,11 @@
 import React,{Component} from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image} from "react-native";
 
-
+ 
 export default class DetailedScreen extends Component{
     render(){
+        const backdrop_path = this.props.route.params.backdrop_path;
+        const image = { uri: "https://image.tmdb.org/t/p/w500/"+backdrop_path};
         const name = this.props.route.params.title;
         const overview = this.props.route.params.overview;
         const poster_path = this.props.route.params.poster_path;
@@ -13,31 +15,40 @@ export default class DetailedScreen extends Component{
         return(
             <View style={styles.container}>
                 <Text style={styles.title}> {name}</Text>
+                <Text style={styles.percentage}>Popularity: {Math.round(popularity/100)}%</Text>
                 <Image style={styles.image} source={{uri:"https://image.tmdb.org/t/p/w500/"+poster_path}}></Image>
-                <Text style={styles.textStyle}>Overview: {overview}</Text>
-                <Text style={styles.textStyle}>Original Language: {original_language}</Text>
-                <Text style={styles.textStyle}>popularity: {Math.round(popularity/100)}%</Text>
                 <Text style={styles.textStyle}>Release Date: {release_date}</Text>
+                <Text style={styles.textStyle}>Original Language: {original_language}</Text>
+                <Text style={styles.topic}>Overview:</Text>
+                <Text style={styles.textStyle}>{overview}</Text>
             </View>    
         );
     }  
 }
 
-//.toLocaleString("en", {style: "percent"})
 const styles = StyleSheet.create({
     container:{
         flex:1,
         justifyContent:'flex-start',
         alignItems:'center',
-        backgroundColor:'#4d5967',
     },
     title:{
-        marginTop:6,
-        fontSize:28,
+        marginTop:9,
+        fontSize:26,
+        fontWeight:'bold',
+    },
+    topic:{
+        fontSize:20,
+        color:'black',
+        paddingRight:270,
+        marginTop:10,
+
     },
     textStyle:{
-        fontSize:14,
+        fontSize:17,
         marginLeft:20,
+        marginRight:20,
+        textAlign:'justify'
     },
     image:{
         width:300,
@@ -51,5 +62,12 @@ const styles = StyleSheet.create({
         padding: 20,
         margin:10,
         borderRadius:20,
+    },
+    percentage:{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        fontSize:20,
+        color:'#db1358'
     }
 })
