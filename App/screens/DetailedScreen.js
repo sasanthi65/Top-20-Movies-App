@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
         marginTop:9,
         fontSize:26,
         fontWeight:'bold',
+        color:'black',
     },
     topic:{
         fontSize:20,
         color:'#db1358',
         paddingRight:270,
         marginTop:10,
-
     },
     textStyle:{
         fontSize:17,
